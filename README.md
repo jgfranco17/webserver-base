@@ -1,2 +1,2 @@
-# Pingbot
-Basic Python scripts for creating server-client connection for latency testing
+# Base Webserver Kit
+Basic Python scripts for creating server-client connection for latency testing.
