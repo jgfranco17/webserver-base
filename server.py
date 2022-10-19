@@ -8,7 +8,7 @@ parser = argparse.ArgumentParser()
 parser.add_argument("--server", "-s",
                     type=str, required=False, 
                     help="IP address to listen on", 
-                    default=socket.gethostbyname((socket.gethostname()))
+                    default=socket.gethostbyname(socket.gethostname()))
 parser.add_argument("--port",
                     type=int, required=False, 
                     help="Port to connect to", 
