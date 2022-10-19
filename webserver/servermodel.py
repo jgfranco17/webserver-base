@@ -4,9 +4,9 @@ import logging as lg
 
 
 class Server(object):
-    def __init__(self, host, port):
+    def __init__(self, host:str=None, port:int=0, name:str="CENTRAL SERVER"):
         # Base properties
-        self._host = host
+        self._host = host if host is not None else socket.gethostbyname(socket.gethostname())
         self._port = port
         self._address = (self._host, self._port)
 
@@ -15,11 +15,12 @@ class Server(object):
         self.PING_MESSAGE = "!PING"
         self.HEADER = 64
         self.MESSAGE_FORMAT = "utf-8"
-        self._STARTUP_LABEL = "----- TEST SERVER -----"
+        self._STARTUP_LABEL = f'----- {name} -----'
 
         # Start up server
         self._server = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         self._server.bind(self._address)
+        self._host, self._port = self._server.getsockname()
         print(f'\n{"*"*len(self._STARTUP_LABEL)}\n{self._STARTUP_LABEL}\n{"*"*len(self._STARTUP_LABEL)}\n')
 
         # Configure logging
