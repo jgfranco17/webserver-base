@@ -9,18 +9,17 @@ from .timing import TimeInterval
 
 
 class Client(object):
+    DISCONNECT_MESSAGE = "!DISCONNECT"
+    PING_MESSAGE = "!PING"
+    HEADER = 64
+    MESSAGE_FORMAT = "utf-8"
+    MAX_RESPONSE_SIZE = 1024
+    
     def __init__(self, host, port):
         # Base properties
         self._host = host
         self._port = port
         self._address = (self._host, self._port)
-
-        # Server constants
-        self.DISCONNECT_MESSAGE = "!DISCONNECT"
-        self.PING_MESSAGE = "!PING"
-        self.HEADER = 64
-        self.MESSAGE_FORMAT = "utf-8"
-        self.MAX_RESPONSE_SIZE = 1024
 
         # Configure logging
         log_fmt = "[%(levelname)s] %(asctime)s | %(message)s"
