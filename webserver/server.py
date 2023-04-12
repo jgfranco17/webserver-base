@@ -4,24 +4,23 @@ import logging as lg
 
 
 class Server(object):
+    DISCONNECT_MESSAGE = "!DISCONNECT"
+    PING_MESSAGE = "!PING"
+    HEADER = 64
+    MESSAGE_FORMAT = "utf-8"
+    
     def __init__(self, host:str=None, port:int=0, name:str="CENTRAL SERVER"):
         # Base properties
-        self._host = host if host is not None else socket.gethostbyname(socket.gethostname())
-        self._port = port
-        self._address = (self._host, self._port)
-
-        # Server constants
-        self.DISCONNECT_MESSAGE = "!DISCONNECT"
-        self.PING_MESSAGE = "!PING"
-        self.HEADER = 64
-        self.MESSAGE_FORMAT = "utf-8"
-        self._STARTUP_LABEL = f'----- {name} -----'
+        self.__host = host if host is not None else socket.gethostbyname(socket.gethostname())
+        self.__port = port
+        self.__address = (self.__host, self.__port)
+        self.startup_label = f'----- {name} -----'
 
         # Start up server
         self._server = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-        self._server.bind(self._address)
-        self._host, self._port = self._server.getsockname()
-        print(f'\n{"*"*len(self._STARTUP_LABEL)}\n{self._STARTUP_LABEL}\n{"*"*len(self._STARTUP_LABEL)}\n')
+        self._server.bind(self.__address)
+        self.__host, self.__port = self._server.getsockname()
+        print(f'\n{"*"*len(self.startup_label)}\n{self.startup_label}\n{"*"*len(self.startup_label)}\n')
 
         # Configure logging
         log_fmt = "[%(levelname)s] %(asctime)s | %(message)s"
@@ -94,7 +93,7 @@ class Server(object):
         service clash.
         """
         self._server.listen()
-        lg.info(f'[SERVER START] Server {self._host}:{self._port} listening!')
+        lg.info(f'[SERVER START] Server {self.__host}:{self.__port} listening!')
         server_running = True
         
         while server_running:
