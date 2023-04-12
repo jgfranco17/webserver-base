@@ -1,6 +1,7 @@
 import pytest
 import socket
 from webserver.server import Server
+from webserver.client import Client
 
 
 @pytest.fixture
