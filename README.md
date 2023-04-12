@@ -40,8 +40,8 @@ It is highly recommended to use `pyenv` to manage Python versions. This project 
 To get started with this project, clone the repository to your local machine and install the required dependencies.
 
 ```bash
-git clone https://github.com/jgfranco17/pyxelbyte.git
-cd pyxelbyte
+git clone https://github.com/jgfranco17/webserver-base.git
+cd webserver-base
 pip install -r requirements.txt
 ```
 
