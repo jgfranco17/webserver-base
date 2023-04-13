@@ -17,9 +17,9 @@ class Server(object):
         self.startup_label = f'----- {name} -----'
 
         # Start up server
-        self._server = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-        self._server.bind(self.__address)
-        self.__host, self.__port = self._server.getsockname()
+        self.__server = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+        self.__server.bind(self.__address)
+        self.__host, self.__port = self.__server.getsockname()
         print(f'\n{"*"*len(self.startup_label)}\n{self.startup_label}\n{"*"*len(self.startup_label)}\n')
 
         # Configure logging
@@ -92,13 +92,13 @@ class Server(object):
         concurrent responses from multiple clients and prevent
         service clash.
         """
-        self._server.listen()
+        self.__server.listen()
         lg.info(f'[SERVER START] Server {self.__host}:{self.__port} listening!')
         server_running = True
         
         while server_running:
             try:
-                conn, addr = self._server.accept()
+                conn, addr = self.__server.accept()
                 thread = threading.Thread(target=self.handle_client, args=(conn, addr))
                 thread.daemon = True
                 thread.start()
