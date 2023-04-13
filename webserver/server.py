@@ -30,7 +30,6 @@ class Server(object):
             format=log_fmt,
             datefmt=date_fmt
         )
-        lg.getLogger('matplotlib.font_manager').setLevel(lg.WARNING)
 
     def handle_client(self, conn, addr) -> None:
         """
