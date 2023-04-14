@@ -4,7 +4,7 @@ from webserver.server import Server
 from webserver.client import Client
 
 
-@pytest.fixture
+@pytest.fixture(scope='module')
 def client():
     client = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
     client.connect(('localhost', 8000))
